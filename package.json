@@ -1,0 +1,19 @@
+{
+  "name": "poc-cache-y-paginado",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "redis": "^4.7.0"
+  }
+}
