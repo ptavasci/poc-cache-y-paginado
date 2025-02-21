@@ -5,6 +5,8 @@ async function cacheMiddleware(req, res, next) {
     const hash = crypto.createHash('md5').update(JSON.stringify(restQuery)).digest('hex');
     const cacheKey = `cache:${req.originalUrl.split('?')[0]}:${hash}`;
 
+    //falta mejorar el hash para que se base en un identificador de traza que provenga desde el front para diferenciar las requests que provienen del paginado de las que provienen del botón buscar
+
     try {
         const cachedData = await req.redisClient.get(cacheKey);
 
