@@ -3,6 +3,8 @@ const redisClient = require('./redisClient');
 
 const paginationMiddleware = require('./paginationMiddleware');
 const cacheMiddleware = require('./cacheMiddleware');
+const getData = require('./mockedService');
+
 const app = express();
 
 // Hacer que el cliente Redis esté disponible para el middleware de caché
@@ -14,15 +16,11 @@ app.use((req, res, next) => {
 app.use('/api', cacheMiddleware, paginationMiddleware);
 
 app.get('/api/your-endpoint', (req, res) => {
-    console.info('Recuperando data de la DB');
+    res.json(getData());
+});
 
-    const currentSeconds = new Date().getSeconds();
-    const fixedElements = 100;
-    const totalElements = fixedElements + currentSeconds;
-
-    const data = Array.from({ length: totalElements }, (_, i) => (i + 1).toString());
-
-    res.json(data);
+app.get('/api-sinpaginado', (req, res) => {
+    res.json(getData());
 });
 
 app.listen(3000, () => {
