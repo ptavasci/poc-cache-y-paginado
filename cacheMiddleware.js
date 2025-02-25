@@ -19,7 +19,8 @@ async function cacheMiddleware(req, res, next) {
     res.sendResponse = res.json;
     res.json = (body) => {
       if (res.locals.originaldata) {
-        req.redisClient.setEx(cacheKey, 30 * 60, JSON.stringify(res.locals.originaldata)); // Cache for 30 minutes
+        req.redisClient.setEx(cacheKey, 30 * 60, JSON.stringify(res.locals.originaldata)) // Cache for 30 minutes
+          .catch(err => console.error('Error setting data to Redis:', err));
       }
       res.sendResponse(body);
     };
