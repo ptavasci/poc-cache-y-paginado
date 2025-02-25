@@ -14,6 +14,10 @@ function paginationMiddleware(req, res, next) {
 
     req.pagination = value;
 
+    // Remove limit and offset from req.query
+    delete req.query.limit;
+    delete req.query.offset;
+
     const originalJson = res.json.bind(res);
 
     const paginatedData = (data) => {
@@ -22,6 +26,7 @@ function paginationMiddleware(req, res, next) {
         if (!Array.isArray(data)) {
             return originalJson(data);
         }
+
         const { limit, offset } = req.pagination;
         const paginatedData = data.slice(offset, offset + limit);
         const totalPages = Math.ceil(data.length / limit);
@@ -39,7 +44,12 @@ function paginationMiddleware(req, res, next) {
     res.json = paginatedData;
 
     if (req.cacheddata) {
+        try {
         paginatedData(req.cacheddata);
+        } catch (err) {
+            console.error('Error paginating cached data:', err);
+            next();
+        }
     } else {
         next();
     }
