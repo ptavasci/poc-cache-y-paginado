@@ -45,7 +45,7 @@ function paginationMiddleware(req, res, next) {
 
     if (req.cacheddata) {
         try {
-        paginatedData(req.cacheddata);
+            paginatedData(req.cacheddata);
         } catch (err) {
             console.error('Error paginating cached data:', err);
             next();
