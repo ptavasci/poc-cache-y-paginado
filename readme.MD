@@ -4,4 +4,5 @@ Este proyecto tiene por objetivo lograr un paginado que mediante un identificado
 
 Para probarlo requiere tener el contenedor de Redis levantado en localhost, según el docker-compose.yml incluido en el repositorio.
 
+![alt text](<Cache + Paginado desde el FRONT con escenarios.png>)
 ![alt text](<Cache + Paginado.png>)
